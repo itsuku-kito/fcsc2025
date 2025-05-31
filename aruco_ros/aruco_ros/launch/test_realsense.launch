@@ -1,0 +1,19 @@
+<launch>
+
+  <group ns="mover_cam">
+    <node pkg="tf" type="static_transform_publisher" name="static_mover_cam" output="screen" args="0 0.215 0.165 0 0 -1.57 base_link mover_cam 1000" respawn="true" respawn_delay="1" />
+
+
+    <node pkg="aruco_ros" type="marker_publisher" name="aruco_marker_publisher">
+        <remap from="/camera_info" to="/camera/color/camera_info" />
+        <remap from="/image" to="/camera/color/image_raw" />
+        <param name="image_is_rectified" value="True"/>
+        <param name="marker_size"        value="0.039"/>  <!-- [m] -->
+        <param name="reference_frame"    value="mover_cam"/>   <!-- frame in which the marker pose will be refered -->
+        <param name="camera_frame"       value="mover_cam"/>
+    </node>
+  </group>
+  
+  <node pkg="aruco_ros" type="mover_cam_tf_broadcaster.py" name="mover_cam_tf_broadcaster"/>
+
+</launch>
