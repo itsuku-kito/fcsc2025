@@ -17,6 +17,17 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
 )
 
+add_service_files(
+  FILES
+  JudgeMarker.srv
+)
+
+## Generate added messages and services with any dependencies listed here
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
+
 generate_dynamic_reconfigure_options(
   cfg/ArucoThreshold.cfg
 )
@@ -26,7 +37,7 @@ add_compile_options(-std=c++11)
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES aruco_ros_utils
-  CATKIN_DEPENDS aruco sensor_msgs tf 
+  CATKIN_DEPENDS aruco sensor_msgs tf message_runtime
 )
 
 include_directories(
